@@ -4,21 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IOT.Core.IRepository.Agent
+namespace IOT.Core.IRepository.Users
 {
-    public interface IAgentRepository
+    public interface IUsersRepository
     {
         int UptZt(int sid);//修改状态
         //添加
-        int AddAgent(IOT.Core.Model.Agent a);
+        int AddUsers(IOT.Core.Model.Users a);
 
         //显示
-        List<IOT.Core.Model.Agent> ShowAgent();
+        List<IOT.Core.Model.Users> ShowUsers();
 
         //删除
-        int DelAgent(string id);
+        int DelUsers(string id);
 
         //修改
-        int UptAgent(IOT.Core.Model.Agent a);
+        int UptUsers(IOT.Core.Model.Users a);
     }
 }

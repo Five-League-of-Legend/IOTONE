@@ -26,5 +26,30 @@ namespace IOT.Core.Api.Controllers
             var ls = _agentRepository.ShowAgent();
             return Ok(new { msg = "", code = 0, data = ls });
         }
+
+
+        //删除
+        [Route("/api/AgentDel")]
+        [HttpDelete]
+        public int AgentDel(string id)
+        {
+            return _agentRepository.DelAgent(id);
+        }
+
+
+        //修改
+        [HttpPost]
+        [Route("/api/AgentUpt")]
+        public int AgentUpt(IOT.Core.Model.Agent a)
+        {
+            return _agentRepository.UptAgent(a);
+        }
+        //修改状态
+        [HttpPost]
+        [Route("/api/AgentUptZt")]
+        public int AgentUptZt(int sid)
+        {
+            return _agentRepository.UptZt(sid);
+        }
     }
 }

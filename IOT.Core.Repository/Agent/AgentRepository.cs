@@ -28,13 +28,36 @@ namespace IOT.Core.Repository.Agent
         {
             string sql = "select * from Agent";
             return DapperHelper.GetList<Model.Agent>(sql);
-          
         }
 
         public int UptAgent(Model.Agent a)
         {
-            string sql = $"update set Agent values (null,'{a.AgentName}', '{a.Icon}', '{a.BCImg}', '{a.BackgroudColor}', '{a.Fans}', {a.AgentState}, {a.One}, {a.Two}, {a.Three},'{a.Explaina}')";
+            string sql = $"update  Agent set values (null,'{a.AgentName}', '{a.Icon}', '{a.BCImg}', '{a.BackgroudColor}', '{a.Fans}', {a.AgentState}, {a.One}, {a.Two}, {a.Three},'{a.Explaina}')";
             return DapperHelper.Execute(sql);
         }
+
+        public int UptZt(int sid)
+        {
+            string sql = "select * from Agent";
+            
+            List<Model.Agent> la = DapperHelper.GetList<Model.Agent>(sql);
+
+            Model.Agent aa = la.FirstOrDefault(x => x.AgentId.Equals(sid));
+            string sql1 = "";
+            if (aa.AgentState == 0)
+            {
+                sql1 = $"UPDATE Agent SET AgentState=AgentState+1 where AgentId={sid}";
+                
+            }
+            else
+            {
+                sql1 = $"UPDATE Agent SET AgentState=AgentState-1 where AgentId={sid}";
+               
+            }
+            int i = DapperHelper.Execute(sql1);
+            return i;
+        }
+       
+
     }
 }
