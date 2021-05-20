@@ -1,4 +1,5 @@
 ﻿using IOT.Core.IRepository.Colonel;
+using IOT.Core.IRepository.Colonel.Brokerage;
 using IOT.Core.IRepository.Colonel.ColonelGrade;
 using IOT.Core.IRepository.Colonel.ColonelManagement;
 using IOT.Core.IRepository.Colonel.GroupPurchase;
@@ -21,13 +22,15 @@ namespace IOT.Core.Api.Controllers
         private IColonelGradeRepository _colonelGradeRepository;
         private IGroupPurchaseRepository _groupPurchaseRepository;
         private IPathRepository _pathRepository;
+        private IBrokerageRepository _brokerageRepository;
 
         public ColonelController(
             IColonelRepository colonelRepository,
             IColonelManagementRepository colonelManagementRepository,
             IColonelGradeRepository colonelGradeRepository,
             IGroupPurchaseRepository groupPurchaseRepository,
-            IPathRepository pathRepository
+            IPathRepository pathRepository,
+            IBrokerageRepository brokerageRepository
             )
         {
             _colonelRepository = colonelRepository;
@@ -35,6 +38,7 @@ namespace IOT.Core.Api.Controllers
             _colonelGradeRepository = colonelGradeRepository;
             _groupPurchaseRepository = groupPurchaseRepository;
             _pathRepository = pathRepository;
+            _brokerageRepository = brokerageRepository;
         }
 
         //-------------------------------------------------------------------------------------------------
@@ -108,7 +112,7 @@ namespace IOT.Core.Api.Controllers
 
             return Ok(paths);
         }
-
+        
         /// <summary>
         /// 添加路线
         /// </summary>
@@ -150,6 +154,7 @@ namespace IOT.Core.Api.Controllers
 
         //--------------------------------------------------------------------------------------------------
         //5.19
+        #region
 
         /// <summary>
         /// 团长集合
@@ -245,5 +250,6 @@ namespace IOT.Core.Api.Controllers
             return Ok(users);
         }
 
+        #endregion
     }
 }
