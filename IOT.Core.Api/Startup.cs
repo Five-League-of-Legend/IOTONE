@@ -1,17 +1,3 @@
-using IOT.Core.IRepository.Activity;
-using IOT.Core.IRepository.Colonel;
-using IOT.Core.IRepository.Colonel.Brokerage;
-using IOT.Core.IRepository.Colonel.ColonelGrade;
-using IOT.Core.IRepository.Colonel.ColonelManagement;
-using IOT.Core.IRepository.Colonel.GroupPurchase;
-using IOT.Core.IRepository.Colonel.Path;
-using IOT.Core.Repository.Activity;
-using IOT.Core.Repository.Colonel;
-using IOT.Core.Repository.Colonel.Brokerage;
-using IOT.Core.Repository.Colonel.ColonelGrade;
-using IOT.Core.Repository.Colonel.ColonelManagement;
-using IOT.Core.Repository.Colonel.GroupPurchase;
-using IOT.Core.Repository.Colonel.Path;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -24,6 +10,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using IOT.Core.IRepository.Activity;
+using IOT.Core.Repository.Activity;
+using IOT.Core.IRepository.SeckillCom;
+using IOT.Core.Repository.SeckillCom;
+using IOT.Core.IRepository.Bargain;
+using IOT.Core.Repository.Bargain;
 
 namespace IOT.Core.Api
 {
@@ -61,11 +53,16 @@ namespace IOT.Core.Api
             services.AddSingleton<IBrokerageRepository, BrokerageRepository>();
 
 
+            services.AddSingleton<IBrokerageRepository, BrokerageRepository>();
 
 
-            services.AddCors(options => 
-            options.AddPolicy("cors",
-            p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
+            services.AddScoped<IActivityRepository, ActivityRepository>();
+            services.AddScoped<ISeckillComRepository, SeckillComRepository>();
+            services.AddScoped<IBargainRepository,BargainRepository>();
+            
+
+
+            services.AddCors(options => options.AddPolicy("cors", p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

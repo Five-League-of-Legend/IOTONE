@@ -1,55 +1,54 @@
-﻿using IOT.Core.Common;
-using IOT.Core.IRepository.Activity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using IOT.Core.IRepository.Activity;
+using IOT.Core.Common;
 
 namespace IOT.Core.Repository.Activity
 {
     public class ActivityRepository : IActivityRepository
     {
-        /// <summary>
-        /// 添加
-        /// </summary>
-        /// <param name="a"></param>
-        /// <returns></returns>
-        public int AddActivity(Model.Activity a)
+        public int Delete(string ids)
         {
-            string sql = $"insert into Activity values (null,'{a.ActivityName}', '{a.BeginTime}', '{a.EndTime}', '{a.Slideshow}', {a.State},'{a.CreateDate}', {a.ActivityTime})";
+            string sql = $"DELETE FROM Activity WHERE ActivityId IN ({ids})";
             return DapperHelper.Execute(sql);
         }
 
-        /// <summary>
-        /// 删除
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        public int DelActivity(string id)
+        public int Insert(Model.Activity Model)
         {
-            string sql = $"delete from Activity where ActivityId={id}";
+            string sql = $"INSERT INTO Activity VALUES (NULL,'{Model.ActivityName}','{Model.BeginTime}','{Model.EndTime}','{Model.Slideshow}',{Model.State},NOW(),{Model.ActivityTime});";
             return DapperHelper.Execute(sql);
         }
 
-        /// <summary>
-        /// 显示
-        /// </summary>
-        /// <returns></returns>
-        public List<Model.Activity> ShowActivity()
+        public List<Model.Activity> Query()
         {
-            string sql = "select * from Activity"; 
+            string sql = "SELECT * FROM Activity;";
             return DapperHelper.GetList<Model.Activity>(sql);
         }
 
-        /// <summary>
-        /// 修改
-        /// </summary>
-        /// <param name="a"></param>
-        /// <returns></returns>
-        public int UptActivity(Model.Activity a)
+        public int Uptdate(Model.Activity Model)
         {
-            throw new NotImplementedException();
+            string sql = $"update Activity set ActivityName='{Model.ActivityName}', BeginTime='{Model.BeginTime}', EndTime='{Model.EndTime}', Slideshow='{Model.Slideshow}', State={Model.State},CreateDate='{Model.CreateDate}', ActivityTime={Model.ActivityTime} where ActivityId={Model.ActivityId}";
+            return DapperHelper.Execute(sql);
+        }
+
+        public int UptZt(int aid)
+        {
+            string sql = "SELECT * FROM Activity;";
+            List<Model.Activity> la = DapperHelper.GetList<Model.Activity>(sql);
+            Model.Activity aa = la.FirstOrDefault(x => x.ActivityId.Equals(aid));
+            string sql1 = "";
+            if (aa.State==0)
+            {
+                sql1 = $"UPDATE Activity SET State=State+1 where ActivityId={aid}";
+            }
+            else
+            {
+                sql1 = $"UPDATE Activity SET State=State-1 where ActivityId={aid}";
+            }
+            return DapperHelper.Execute(sql1);
         }
     }
 }
