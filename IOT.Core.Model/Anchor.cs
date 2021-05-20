@@ -11,7 +11,7 @@ namespace IOT.Core.Model
     /// </summary>
     public class Anchor
     {
-        public int AnchorId   { get; set; }
+        public int AnchorId { get; set; }
         public string AnchorName { get; set; }
     }
 }
