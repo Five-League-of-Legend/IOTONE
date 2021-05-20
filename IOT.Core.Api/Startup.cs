@@ -1,11 +1,13 @@
 using IOT.Core.IRepository.Activity;
 using IOT.Core.IRepository.Colonel;
+using IOT.Core.IRepository.Colonel.Brokerage;
 using IOT.Core.IRepository.Colonel.ColonelGrade;
 using IOT.Core.IRepository.Colonel.ColonelManagement;
 using IOT.Core.IRepository.Colonel.GroupPurchase;
 using IOT.Core.IRepository.Colonel.Path;
 using IOT.Core.Repository.Activity;
 using IOT.Core.Repository.Colonel;
+using IOT.Core.Repository.Colonel.Brokerage;
 using IOT.Core.Repository.Colonel.ColonelGrade;
 using IOT.Core.Repository.Colonel.ColonelManagement;
 using IOT.Core.Repository.Colonel.GroupPurchase;
@@ -55,6 +57,8 @@ namespace IOT.Core.Api
             services.AddSingleton<IGroupPurchaseRepository, GroupPurchaseRepository>();
 
             services.AddSingleton<IPathRepository, PathRepository>();
+
+            services.AddSingleton<IBrokerageRepository, BrokerageRepository>();
 
 
 
